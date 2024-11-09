@@ -1,14 +1,16 @@
 package first_time;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class first_time {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // Set the path to the Edge WebDriver
         System.setProperty("webdriver.edge.driver", "D:\\softwares\\selenium\\msedgedriver.exe");
         //
@@ -25,15 +27,14 @@ public class first_time {
         //driver.findElement(By.xpath("//*[@id=\":rb:--label\"]")).click();
         //i++;
         //}
-        driver.get("https://cosmocode.io/automation-practice-webtable/");
-		
-		List<WebElement> val = (List<WebElement>) driver.findElements(By.xpath("//table[@id='countries']/tbody/tr/td[2]"));
-		//List<WebElement> vald=driver.findElements(By.xpath("//table[@id='countries']/tbody/tr/td[2]"));
-        
-		for(WebElement vals : val) {
-			System.out.println(vals.getText());
-		}
-		driver.close();
+        driver.manage().window().maximize();
+        driver.get("http://www.greenstechnologys.com/");
+        WebElement courses = driver.findElement(By.linkText("COURSES"));
+        Actions a=new Actions(driver);
+        a.moveToElement(courses).perform();
+        Thread.sleep(2000);
+        WebElement devOpTraining = driver.findElement(By.xpath("//span[text()='DevOps Training']"));
+        a.click(devOpTraining).perform();
     }
 
 }
